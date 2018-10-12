@@ -1,0 +1,28 @@
+<h2>Listing Players</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Character Name</th>
+      <th>Active</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for player <- @game.players do %>
+      <tr>
+        <td><%= player.character.name %></td>
+        <td><%= player.character.active %></td>
+        <td class="text-right">
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="text-right">
+        <span><%= link "New Player", to: game_player_path(@conn, :new, @game.id), class: "btn btn-success btn-xs" %></span>
+      </td>
+  </tbody>
+</table>

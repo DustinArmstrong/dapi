@@ -1,0 +1,10 @@
+<header>
+  <h2><%= @character.name %></h2>
+</header>
+<p>
+  <strong>User:</strong>
+  <%= @character.user.username %>
+</p>
+
+<span><%= link "Edit", to: character_path(@conn, :edit, @character) %></span>
+<span><%= link "Back", to: character_path(@conn, :index) %></span>

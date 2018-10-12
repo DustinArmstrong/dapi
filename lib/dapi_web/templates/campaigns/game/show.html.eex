@@ -1,0 +1,11 @@
+<header>
+  <h2><%= @game.name %></h2>
+</header>
+<p><%= @game.summary %></p>
+<p>
+  <strong>DM:</strong>
+  <%= @game.user.username %>
+</p>
+
+<span><%= link "Edit", to: game_path(@conn, :edit, @game) %></span>
+<span><%= link "Back", to: game_path(@conn, :index) %></span>
