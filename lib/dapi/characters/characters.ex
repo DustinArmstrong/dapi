@@ -3,6 +3,7 @@ defmodule Dapi.Characters do
   The Characters context.
   """
 
+  require IEx
   import Ecto.Query, warn: false
   alias Dapi.Repo
 
@@ -10,15 +11,33 @@ defmodule Dapi.Characters do
   alias Dapi.Characters.Character
 
   @doc """
-  Returns the list of characters.
+  Returns the list of user's characters.
 
   ## Examples
 
-      iex> list_characters()
+      iex> list_characters(user)
       [%Character{}, ...]
 
   """
-  def list_characters do
+  def list_characters(user) do
+    query =
+      from c in Character,
+        where: c.user_id == ^user.id
+    query
+    |> Repo.all()
+    |> Repo.preload([:user, :game])
+  end
+
+  @doc """
+  Returns the list of all characters.
+
+  ## Examples
+
+      iex> list_all_characters()
+      [%Character{}, ...]
+
+  """
+  def list_all_characters do
     Character
     |> Repo.all()
     |> Repo.preload([:user, :game])

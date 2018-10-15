@@ -1,5 +1,6 @@
 defmodule DapiWeb.UserController do
   use DapiWeb, :controller
+  require IEx
 
   alias Dapi.Accounts
   alias Dapi.Accounts.User
@@ -15,6 +16,7 @@ defmodule DapiWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
+    IEx.pry
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn

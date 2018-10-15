@@ -5,7 +5,7 @@ defmodule DapiWeb.Characters.CharacterController do
   alias Dapi.Characters.Character
 
   def index(conn, _params) do
-    characters = Characters.list_characters()
+    characters = Characters.list_characters(conn.assigns.current_user)
     render(conn, "index.html", characters: characters)
   end
 
