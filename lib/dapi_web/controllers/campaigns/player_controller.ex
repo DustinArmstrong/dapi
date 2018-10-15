@@ -22,8 +22,9 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
   end
 
   def index(conn, _params, game) do
-    # game = Campaigns.get_game!(game_id)
-    render(conn, "index.html", game: game)
+    players =
+      Campaigns.list_players()
+    render(conn, "index.html", players: players, game: game)
   end
 
   def new(conn, _params, game) do
@@ -35,12 +36,11 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
   end
 
   def create(conn, %{"player" => player_params}, game) do
-    IEx.pry
     case Campaigns.create_player(game, player_params) do
       {:ok, game} ->
         conn
         |> put_flash(:info, "Game created successfully.")
-        |> redirect(to: game_player_path(conn, :index, game))
+        |> redirect(to: game_player_path(conn, :index, game.id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

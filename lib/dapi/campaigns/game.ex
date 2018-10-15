@@ -10,6 +10,7 @@ defmodule Dapi.Campaigns.Game do
     field :summary, :string
     belongs_to :user, User
     has_many :players, Player
+    has_many :characters, through: [:players, :character]
 
     timestamps()
   end

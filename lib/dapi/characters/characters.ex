@@ -21,7 +21,7 @@ defmodule Dapi.Characters do
   def list_characters do
     Character
     |> Repo.all()
-    |> Repo.preload([:user])
+    |> Repo.preload([:user, :player])
   end
 
   @doc """
@@ -41,7 +41,7 @@ defmodule Dapi.Characters do
   def get_character!(id) do
     Character
     |> Repo.get!(id)
-    |> Repo.preload([:user])
+    |> Repo.preload([:user, :player])
   end
 
   @doc """

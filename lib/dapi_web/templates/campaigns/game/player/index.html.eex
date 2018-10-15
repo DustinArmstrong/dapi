@@ -12,13 +12,12 @@
     <%= for player <- @game.players do %>
       <tr>
         <td><%= player.character.name %></td>
-        <td><%= player.character.active %></td>
+        <td><%= player.active %></td>
         <td class="text-right">
         </td>
       </tr>
     <% end %>
     <tr>
-      <td></td>
       <td></td>
       <td></td>
       <td class="text-right">
