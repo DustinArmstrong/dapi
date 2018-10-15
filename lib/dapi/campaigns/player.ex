@@ -18,5 +18,6 @@ defmodule Dapi.Campaigns.Player do
     player
     |> cast(attrs, [:active, :game_id, :character_id])
     |> validate_required([:active, :game_id, :character_id])
+    |> unique_constraint(:character_id, name: :players_character_id_index, message: "Character is already in another game")
   end
 end
