@@ -3,7 +3,6 @@ defmodule Dapi.Characters do
   The Characters context.
   """
 
-  require IEx
   import Ecto.Query, warn: false
   alias Dapi.Repo
 
