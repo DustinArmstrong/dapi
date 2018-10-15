@@ -12,6 +12,7 @@
     <%= for character <- @characters do %>
       <tr>
         <td><%= character.name %></td>
+        <td><%= character.user.name %></td>
         <td>
           <%= if character.game do %>
             <%= link character.game.name, to: game_path(@conn, :show, character.game) %>

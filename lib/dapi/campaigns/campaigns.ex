@@ -12,7 +12,25 @@ defmodule Dapi.Campaigns do
   alias Dapi.Campaigns.{Game, Player}
 
   @doc """
-  Returns the list of games.
+  Returns the list of user's games.
+
+  ## Examples
+
+      iex> list_games(user)
+      [%Game{}, ...]
+
+  """
+  def list_games(user) do
+    query =
+      from g in Game,
+        where: g.user_id == ^user.id
+    query
+    |> Repo.all()
+    |> Repo.preload([:user, :characters])
+  end
+
+  @doc """
+  Returns the list of all games.
 
   ## Examples
 
@@ -20,10 +38,10 @@ defmodule Dapi.Campaigns do
       [%Game{}, ...]
 
   """
-  def list_games do
+  def list_all_games do
     Game
     |> Repo.all()
-    |> Repo.preload([:user])
+    |> Repo.preload([:user, :characters])
   end
 
   @doc """

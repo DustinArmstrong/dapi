@@ -5,7 +5,7 @@ defmodule DapiWeb.Campaigns.GameController do
   alias Dapi.Campaigns.{Game, Player}
 
   def index(conn, _params) do
-    games = Campaigns.list_games()
+    games = Campaigns.list_games(conn.assigns.current_user)
     render(conn, "index.html", games: games)
   end
 

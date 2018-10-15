@@ -12,30 +12,43 @@
 
 alias Dapi.Repo
 
+alias Dapi.Accounts
 alias Dapi.Accounts.{Credential, User}
 
 alias Dapi.Campaigns.{Game, Player}
 
 alias Dapi.Characters.Character
 
-user = Repo.insert!(
-  %User{username: "admin", name: "admin"}
-)
-credential = Repo.insert!(
-  %Credential{user: user, email: "admin@example.com", password: "password"}
-)
+# admin = Repo.insert!(
+#   %User{username: "admin", name: "Admin"}
+# )
+
+admin_params = %{"credential" => %{"email" => "admin@example.com", "password" => "password"},
+  "name" => "admin", "username" => "admin"}
+Accounts.create_user(admin_params)
+admin = Accounts.get_user!(1)
+
+user_params = %{"credential" => %{"email" => "user@example.com", "password" => "password"},
+  "name" => "user", "username" => "user"}
+Accounts.create_user(user_params)
+user = Accounts.get_user!(2)
+
+
+
 game = Repo.insert!(
-  %Game{name: "Campaign One", user: user}
+  %Game{name: "Campaign One", user: admin}
 )
 game2 = Repo.insert!(
-  %Game{name: "Campaign Two", user: user}
+  %Game{name: "Campaign Two", user: admin}
 )
+
 character = Repo.insert!(
-  %Character{name: "Chester", user: user}
+  %Character{name: "Chester", user: admin}
 )
 character2 = Repo.insert!(
   %Character{name: "Wallace", user: user}
 )
+
 player = Repo.insert!(
   %Player{game: game, character: character}
 )
