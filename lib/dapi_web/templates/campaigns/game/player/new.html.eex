@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, game_player_path(@conn, :create, @game)) %>
 
-<span><%= link "Back", to: game_player_path(@conn, :index, @game.id) %></span>
+<span><%= link "Back", to: game_player_path(@conn, :index, @game) %></span>

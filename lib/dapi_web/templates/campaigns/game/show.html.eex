@@ -8,4 +8,5 @@
 </p>
 
 <span><%= link "Edit", to: game_path(@conn, :edit, @game) %></span>
+<span><%= link "Players", to: game_player_path(@conn, :index, @game) %></span>
 <span><%= link "Back", to: game_path(@conn, :index) %></span>

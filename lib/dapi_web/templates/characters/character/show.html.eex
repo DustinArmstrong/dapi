@@ -5,6 +5,12 @@
   <strong>User:</strong>
   <%= @character.user.username %>
 </p>
+<%= if @character.game do %>
+  <p>
+    <strong>Current Game:</strong>
+    <%= link @character.game.name, to: game_path(@conn, :show, @character.game) %>
+  </p>
+<% end %>
 
 <span><%= link "Edit", to: character_path(@conn, :edit, @character) %></span>
 <span><%= link "Back", to: character_path(@conn, :index) %></span>
