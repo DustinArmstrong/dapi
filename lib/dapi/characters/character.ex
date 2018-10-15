@@ -9,6 +9,7 @@ defmodule Dapi.Characters.Character do
     field :name, :string
     belongs_to :user, User
     has_one :player, Player
+    has_one :game, through: [:player, :game]
 
     timestamps()
   end
