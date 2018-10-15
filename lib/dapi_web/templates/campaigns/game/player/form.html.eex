@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%#= hidden_input f, :game, value: @game.id, class: "form-control" %>
+  <%= hidden_input f, :game_id, value: @game.id, class: "form-control" %>
 
   <div class="form-group">
     <%= label f, :character_id, class: "control-label" %>

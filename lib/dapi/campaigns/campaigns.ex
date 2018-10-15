@@ -43,7 +43,7 @@ defmodule Dapi.Campaigns do
   def get_game!(id) do
     Game
     |> Repo.get!(id)
-    |> Repo.preload([:user, :players])
+    |> Repo.preload([:user, :players, :characters])
   end
 
   @doc """
@@ -112,21 +112,21 @@ defmodule Dapi.Campaigns do
     Game.changeset(game, %{})
   end
 
-
   @doc """
-  Returns the list of games.
+  Returns the list of players.
 
   ## Examples
 
-      iex> list_games()
+      iex> list_players()
       [%Player{}, ...]
 
   """
   def list_players do
     Player
     |> Repo.all()
-    |> Repo.preload([:game])
+    |> Repo.preload([:game, :character])
   end
+
 
   @doc """
   Gets a single player.
