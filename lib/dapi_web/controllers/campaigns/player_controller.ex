@@ -37,46 +37,46 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
 
   def create(conn, %{"player" => player_params}, game) do
     case Campaigns.create_player(game, player_params) do
-      {:ok, game} ->
+      {:ok, player} ->
         conn
-        |> put_flash(:info, "Game created successfully.")
+        |> put_flash(:info, "Player created successfully.")
         |> redirect(to: game_player_path(conn, :index, game.id))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    game = Campaigns.get_game!(id)
-    render(conn, "show.html", game: game)
+  def show(conn, %{"id" => id}, game) do
+    player = Campaigns.get_player!(id)
+    render(conn, "show.html", player: player, game: game)
   end
 
-  def edit(conn, %{"id" => id}) do
-    game = Campaigns.get_game!(id)
-    changeset = Campaigns.change_game(game)
-    render(conn, "edit.html", game: game, changeset: changeset)
+  def edit(conn, %{"id" => id}, game) do
+    player = Campaigns.get_player!(id)
+    changeset = Campaigns.change_player(player)
+    render(conn, "edit.html", player: player, game: game, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "game" => game_params}) do
-    game = Campaigns.get_game!(id)
+  def update(conn, %{"id" => id, "player" => player_params}, game) do
+    player = Campaigns.get_player!(id)
 
-    case Campaigns.update_game(game, game_params) do
-      {:ok, game} ->
+    case Campaigns.update_player(player, player_params) do
+      {:ok, player} ->
         conn
-        |> put_flash(:info, "Game updated successfully.")
-        |> redirect(to: game_path(conn, :show, game))
+        |> put_flash(:info, "Player updated successfully.")
+        |> redirect(to: game_player_path(conn, :show, game.id, player.id))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", game: game, changeset: changeset)
+        render(conn, "edit.html", player: player, game: game, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    game = Campaigns.get_game!(id)
-    {:ok, _game} = Campaigns.delete_game(game)
+  def delete(conn, %{"id" => id}, game) do
+    player = Campaigns.get_player!(id)
+    {:ok, _player} = Campaigns.delete_player(player)
 
     conn
-    |> put_flash(:info, "Game deleted successfully.")
-    |> redirect(to: game_path(conn, :index))
+    |> put_flash(:info, "Player deleted successfully.")
+    |> redirect(to: game_path(conn, :show, game.id))
   end
 
   # defp store_game(conn, game) do

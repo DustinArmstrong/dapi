@@ -6,13 +6,13 @@ defmodule Dapi.Repo.Migrations.CreatePlayers do
       add :active, :boolean, default: true, null: false
       add :game_id, references(:games, on_delete: :delete_all),
                     null: false
-      add :character_id, references(:players, on_delete: :delete_all),
+      add :character_id, references(:characters, on_delete: :delete_all),
                     null: false
 
       timestamps()
     end
 
-    create index(:players, :game_id)
+    create index(:players, [:game_id, :character_id])
     create unique_index(:players, :character_id)
   end
 end
