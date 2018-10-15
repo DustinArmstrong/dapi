@@ -4,7 +4,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Game</th>
+      <th>User</th>
+      <th>Active Game</th>
       <th></th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
       </tr>
     <% end %>
     <tr>
+      <td></td>
       <td></td>
       <td></td>
       <td class="text-right">
