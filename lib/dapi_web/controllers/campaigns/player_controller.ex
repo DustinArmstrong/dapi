@@ -36,13 +36,16 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
   end
 
   def create(conn, %{"player" => player_params}, game) do
+    characters =
+      Characters.list_characters()
+        |> Enum.map(&{&1.name, &1.id})
     case Campaigns.create_player(game, player_params) do
       {:ok, player} ->
         conn
         |> put_flash(:info, "Player created successfully.")
         |> redirect(to: game_player_path(conn, :index, game.id))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, characters: characters, game: game)
     end
   end
 

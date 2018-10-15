@@ -10,7 +10,7 @@
   <div class="form-group">
     <%= label f, :character_id, class: "control-label" %>
     <%= select f, :character_id, @characters, class: "form-control" %>
-    <%= error_tag f, :name %>
+    <%= error_tag f, :character_id %>
   </div>
 
   <div class="form-group">
