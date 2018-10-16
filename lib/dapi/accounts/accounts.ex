@@ -20,7 +20,7 @@ defmodule Dapi.Accounts do
   def list_users do
     User
     |> Repo.all()
-    |> Repo.preload([:credential, :user_type])
+    |> Repo.preload([:credential])
   end
 
   @doc """
@@ -40,7 +40,7 @@ defmodule Dapi.Accounts do
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload([:credential, :user_type])
+    |> Repo.preload([:credential])
   end
 
   @doc """
@@ -228,106 +228,5 @@ defmodule Dapi.Accounts do
     |> Repo.one
     |> Repo.preload(:user)
     |> Comeonin.Argon2.check_pass(password)
-  end
-
-  alias Dapi.Accounts.UserType
-
-  @doc """
-  Returns the list of user_types.
-
-  ## Examples
-
-      iex> list_user_types()
-      [%UserType{}, ...]
-
-  """
-  def list_user_types do
-    Repo.all(UserType)
-  end
-
-  @doc """
-  Gets a single user_type.
-
-  Raises `Ecto.NoResultsError` if the User type does not exist.
-
-  ## Examples
-
-      iex> get_user_type!(123)
-      %UserType{}
-
-      iex> get_user_type!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_user_type!(id), do: Repo.get!(UserType, id)
-
-  @doc """
-  Creates a user_type.
-
-  ## Examples
-
-      iex> create_user_type(%{field: value})
-      {:ok, %UserType{}}
-
-      iex> create_user_type(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_user_type(attrs \\ %{}) do
-    %UserType{}
-    |> UserType.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a user_type.
-
-  ## Examples
-
-      iex> update_user_type(user_type, %{field: new_value})
-      {:ok, %UserType{}}
-
-      iex> update_user_type(user_type, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_user_type(%UserType{} = user_type, attrs) do
-    user_type
-    |> UserType.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a UserType.
-
-  ## Examples
-
-      iex> delete_user_type(user_type)
-      {:ok, %UserType{}}
-
-      iex> delete_user_type(user_type)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_user_type(%UserType{} = user_type) do
-    Repo.delete(user_type)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking user_type changes.
-
-  ## Examples
-
-      iex> change_user_type(user_type)
-      %Ecto.Changeset{source: %UserType{}}
-
-  """
-  def change_user_type(%UserType{} = user_type) do
-    UserType.changeset(user_type, %{})
-  end
-
-  def valid_user_actions do
-    ["can_add_users",
-     "can_delete_users"]
   end
 end

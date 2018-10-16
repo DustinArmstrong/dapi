@@ -3,22 +3,21 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
       <th>Username</th>
-      <th>Type</th>
+      <th>Name</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for user <- @users do %>
     <tr>
-      <td><%= user.name %></td>
-      <td><%= user.username %></td>
       <td>
-        <%= if user.user_type do %>
-          <%= user.user_type.name %>
+        <%= user.username %>
+        <%= if user.is_admin do %>
+          <span class="badge badge-error">Admin</span>
         <% end %>
       </td>
+      <td><%= user.name %></td>
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>

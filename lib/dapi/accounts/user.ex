@@ -1,17 +1,15 @@
 defmodule Dapi.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Dapi.Accounts.{User, Credential, UserType}
+  alias Dapi.Accounts.{User, Credential}
   alias Dapi.Campaigns.Game
-  # alias Dapi.Characters.Character
-
 
   schema "users" do
     field :name, :string
     field :username, :string
+    field :is_admin, :boolean, default: false
     has_one :credential, Credential
     has_many :games, Game
-    belongs_to :user_type, UserType
 
     timestamps()
   end
@@ -19,8 +17,8 @@ defmodule Dapi.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :user_type_id])
-    |> validate_required([:name, :username])
+    |> cast(attrs, [:name, :username, :is_admin])
+    |> validate_required([:name, :username, :is_admin])
     |> unique_constraint(:username)
   end
 end

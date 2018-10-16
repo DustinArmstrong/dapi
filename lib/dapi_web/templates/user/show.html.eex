@@ -1,4 +1,9 @@
-<h2>Show User</h2>
+<h2>
+  User Details
+  <%= if @user.is_admin do %>
+    <span class="badge badge-error">Admin</span>
+  <% end %>
+</h2>
 
 <ul>
 
@@ -6,13 +11,6 @@
     <strong>Name:</strong>
     <%= @user.name %>
   </li>
-
-  <%= if @user.user_type do %>
-    <li>
-      <strong>Type:</strong>
-      <%= @user.user_type %>
-    </li>
-  <% end %>
 
   <li>
     <strong>Username:</strong>
