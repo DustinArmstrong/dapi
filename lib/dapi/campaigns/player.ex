@@ -6,7 +6,7 @@ defmodule Dapi.Campaigns.Player do
   alias Dapi.Campaigns.{Game, Player}
 
   schema "players" do
-    field :active, :boolean, default: true
+    field :is_active, :boolean, default: true
     belongs_to :character, Character
     belongs_to :game, Game
 
@@ -16,8 +16,8 @@ defmodule Dapi.Campaigns.Player do
   @doc false
   def changeset(player, attrs) do
     player
-    |> cast(attrs, [:active, :game_id, :character_id])
-    |> validate_required([:active, :game_id, :character_id])
+    |> cast(attrs, [:is_active, :game_id, :character_id])
+    |> validate_required([:is_active, :game_id, :character_id])
     |> unique_constraint(:character_id, name: :players_character_id_index, message: "Character is already in another game")
   end
 end

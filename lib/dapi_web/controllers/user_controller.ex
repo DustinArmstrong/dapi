@@ -10,24 +10,18 @@ defmodule DapiWeb.UserController do
   end
 
   def new(conn, _params) do
-    user_types =
-      Accounts.list_user_types()
-        |> Enum.map(&{&1.name, &1.id})
     changeset = Accounts.change_user(%User{})
-    render(conn, "new.html", changeset: changeset, user_types: user_types)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
-    user_types =
-      Accounts.list_user_types()
-        |> Enum.map(&{&1.name, &1.id})
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, user_types: user_types)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
@@ -38,11 +32,8 @@ defmodule DapiWeb.UserController do
 
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    user_types =
-      Accounts.list_user_types()
-        |> Enum.map(&{&1.name, &1.id})
     changeset = Accounts.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset, user_types: user_types)
+    render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do

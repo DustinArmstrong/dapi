@@ -18,7 +18,6 @@
           <ul class="nav nav-pills">
             <%= if @current_user do %>
               <li><%= link "Users", to: user_path(@conn, :index) %></li>
-              <li><%= link "User Types", to: user_type_path(@conn, :index) %></li>
               <li><%= link "Characters", to: character_path(@conn, :index) %></li>
               <li><%= link "Campaigns", to: game_path(@conn, :index) %></li>
               <li><%= link "Sign Out (#{@current_user.name})", to: session_path(@conn, :delete), method: "delete" %></li>
