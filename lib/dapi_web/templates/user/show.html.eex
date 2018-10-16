@@ -7,6 +7,13 @@
     <%= @user.name %>
   </li>
 
+  <%= if @user.user_type do %>
+    <li>
+      <strong>Type:</strong>
+      <%= @user.user_type %>
+    </li>
+  <% end %>
+
   <li>
     <strong>Username:</strong>
     <%= @user.username %>

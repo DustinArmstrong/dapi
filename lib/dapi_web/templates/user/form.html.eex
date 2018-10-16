@@ -6,6 +6,13 @@
   <% end %>
 
   <div class="form-group">
+    <%= label f, :user_type, class: "control-label" %>
+    <%#= text_input f, :user_type, class: "form-control" %>
+    <%= select f, :user_type, @user_types, class: "form-control" %>
+    <%= error_tag f, :user_type %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :name, class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>

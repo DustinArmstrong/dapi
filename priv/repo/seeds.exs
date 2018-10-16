@@ -13,23 +13,29 @@
 alias Dapi.Repo
 
 alias Dapi.Accounts
-alias Dapi.Accounts.{Credential, User}
+alias Dapi.Accounts.{Credential, User, UserType}
 
 alias Dapi.Campaigns.{Game, Player}
 
 alias Dapi.Characters.Character
 
-# admin = Repo.insert!(
-#   %User{username: "admin", name: "Admin"}
-# )
+default_type = Repo.insert!(
+  %UserType{name: "Default", actions: []}
+)
+
+admin_type = Repo.insert!(
+  %UserType{name: "Admin", actions: []}
+)
 
 admin_params = %{"credential" => %{"email" => "admin@example.com", "password" => "password"},
-  "name" => "admin", "username" => "admin"}
+                 "user_type_id" => "#{admin_type.id}",
+                 "name" => "admin", "username" => "admin"}
 Accounts.create_user(admin_params)
 admin = Accounts.get_user!(1)
 
 user_params = %{"credential" => %{"email" => "user@example.com", "password" => "password"},
-  "name" => "user", "username" => "user"}
+                "user_type_id" => "#{default_type.id}",
+                "name" => "user", "username" => "user"}
 Accounts.create_user(user_params)
 user = Accounts.get_user!(2)
 

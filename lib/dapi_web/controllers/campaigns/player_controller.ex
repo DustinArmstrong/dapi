@@ -29,7 +29,7 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
 
   def new(conn, _params, game) do
     characters =
-      Characters.list_characters()
+      Characters.list_characters(conn.assigns.current_user)
         |> Enum.map(&{&1.name, &1.id})
     changeset = Campaigns.change_player(%Player{})
     render(conn, "new.html", changeset: changeset, characters: characters, game: game)
@@ -37,7 +37,7 @@ defmodule DapiWeb.Campaigns.Game.PlayerController do
 
   def create(conn, %{"player" => player_params}, game) do
     characters =
-      Characters.list_characters()
+      Characters.list_characters(conn.assigns.current_user)
         |> Enum.map(&{&1.name, &1.id})
     case Campaigns.create_player(game, player_params) do
       {:ok, player} ->
