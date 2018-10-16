@@ -16,7 +16,7 @@ defmodule Dapi.Campaigns.Game do
   end
 
   @doc false
-  def changeset(game, attrs) do
+  def changeset(%Game{} = game, attrs) do
     game
     |> cast(attrs, [:name, :summary, :user_id])
     |> validate_required([:name, :summary, :user_id])
