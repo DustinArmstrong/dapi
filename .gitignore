@@ -5,7 +5,7 @@
 /*.ez
 node_modules/
 erl_crash.dump
-priv/static/
+# priv/static/
 config/prod.secret.exs
 rel
 
